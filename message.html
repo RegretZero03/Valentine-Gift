@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Envelope + Letter (Open/Close on Click)</title>
+    <link rel="stylesheet" href="./message_style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.3"></script> <!-- Confetti Library -->
+    <script src="fireworks.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="envelope-wrapper">
+            <div class="envelope">
+                <div class="letter">
+                    <div class="text">
+                        <strong>Dear Dabhy,</strong>
+                        <p id="message">
+                            Click to read the message!
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="heart"></div>
+        </div>
+    </div>
+    <script>
+        const messages = [
+            "Hello Dabhy! Happy Valentine's Day💖! Sayang kung malapit lang ako dyan sa inyo nadalhan na kita ng graham cake na ginawa naming kagabi HAHAHAAHHA.",
+            "Napaisip ako, palapit na ng palapit unang anniversary natin ahh. Kunting kembot nalang andyan na AAHHAHAHA.",
+            "Well anyways, thank you for staying by my side, I appreciate it, I really do. Watching videos like anime(we gonna watch Tokyo Ghoul for real >:D),",
+            "movies, and horror gameplays at YouTube (although you mostly fall asleep in most cases, but I still love you❤️ though HAHAHAHAA).",
+            "You even watch my streams and I know most of them are boring or not one of your interest (cuz you like horror games that you don't even want to play😜).",
+            "I found it cute and lovely at the same time when you try to ask that we watch and have some quality time, my little baby getting angry when I don't comply asap is so cute HAHAHAHA",
+            "(tbh when you pout or get angry I think its funny and cute at the same time AHHAAHAHA).",
+            "I hope we can get more quality time when we're both aren't busy (with your work and my school works😭) my little baby😈.",
+            "Btw don't get always frustrated all the time when you work, you're prettier when you smile, laugh, acting cutesy (and when you pout or a little annoyed at me jkjk HAHAHAHA), and when you are enjoying doing what you love.",
+            "I love you so much Dabhy, my Baby, and my Equanimity. Happy Valentines again! I hope you enjoy this joyous day. Mwah, once again I love you Dabhy💖🥰😘!"
+        ];
+
+        let currentIndex = 0;
+        const envelope = document.querySelector('.envelope-wrapper');
+        const messageElement = document.getElementById('message');
+        const letter = document.querySelector('.letter');
+
+        envelope.addEventListener('click', () => {
+            if (!envelope.classList.contains('flap')) {
+                envelope.classList.add('flap');
+                currentIndex = 0;
+                messageElement.textContent = messages[currentIndex];
+            }
+        });
+
+        letter.addEventListener('click', (event) => {
+            event.stopPropagation();
+            currentIndex++;
+            if (currentIndex < messages.length) {
+                messageElement.textContent = messages[currentIndex];
+            } else {
+                
+                envelope.classList.remove('flap');
+                currentIndex = 0;
+                fireworks();
+            }
+        });
+    </script>
+</body>
+</html>
